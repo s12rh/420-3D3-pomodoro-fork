@@ -14,4 +14,10 @@ class LoggerSession(Observateur):
         # Écrivez dans le fichier SEULEMENT si une nouvelle session est complétée
         # (comparez avec self._derniere_session)
         # Mettez à jour self._derniere_session
-        pass
+        
+        donnees = sujet.get_donnees()
+        sessions_completees = donnees["sessions_completees"]
+        if sessions_completees > self._derniere_session:
+            with open(self._chemin, "a") as f:
+                f.write(f"Session {sessions_completees} complétée à {datetime.now()}\n")
+            self._derniere_session = sessions_completees

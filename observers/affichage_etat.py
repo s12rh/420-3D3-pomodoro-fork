@@ -9,8 +9,9 @@ class AffichageEtat(Observateur):
         self._label.pack(pady=5)
 
     def actualiser(self, sujet) -> None:
-        # À compléter :
-        # Récupérez etat depuis sujet.get_donnees()
-        # Mettez à jour le label
-        # Couleur : noir pour "Travail", bleu pour "Pause"
-        pass
+        """Met à jour l'affichage de l'état (Travail ou Pause)."""
+        donnees = sujet.get_donnees()
+        etat = donnees["etat"]
+        self._label.config(text=etat)
+        self._label.config(fg="blue" if etat == "Pause" else "black")
+        
